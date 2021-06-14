@@ -36,7 +36,7 @@ for url in csvReader:
 
             container[j].find_element_by_xpath("//a[@class='ocfR3SKN']").click()
             title = container[j].find_element_by_xpath(".//div[@class='glasR4aX']").text
-            date = container[j].find_element_by_xpath(".//span[@class='_34Xs-BQm']").text
+            date = container[j].find_element_by_xpath(".//span[@class='_34Xs-BQm']").text[14:]
             rating = container[j].find_element_by_xpath(".//span[contains(@class, 'ui_bubble_rating bubble_')]").get_attribute("class").split("_")[3]
             review = container[j].find_element_by_xpath(".//q[@class='IRsGHoPm']").text.replace("\n", " ")
             csvWriter.writerow([hotel_name, date, rating, title, review])

@@ -1,0 +1,8 @@
+1623690309390	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilep6kxrQ/search.json.mozlz4", (void 0)))
+1623690310515	Marionette	INFO	Listening on port 40213
+1623690310625	Marionette	WARN	TLS certificate errors will be ignored for this session
+1623690339098	Marionette	INFO	Stopped listening on port 40213
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
