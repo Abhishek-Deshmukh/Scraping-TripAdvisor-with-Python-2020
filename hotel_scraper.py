@@ -14,6 +14,7 @@ csvReader = csv.reader(inputFile)
 # Open the file to save the review
 csvFile = open(path_to_file, 'a', encoding="utf-8")
 csvWriter = csv.writer(csvFile)
+csvWriter.writerow(["Hotel Name", "Date", "Rating (/50)", "Title", "Review"])
 
 # Import the webdriver
 driver = webdriver.Firefox()
@@ -35,7 +36,7 @@ for url in csvReader:
 
             container[j].find_element_by_xpath("//a[@class='ocfR3SKN']").click()
             title = container[j].find_element_by_xpath(".//div[@class='glasR4aX']").text
-            date = container[j].find_element_by_xpath(".//span[@class='_34Xs-BQm']").get_attribute("title")
+            date = container[j].find_element_by_xpath(".//span[@class='_34Xs-BQm']").text
             rating = container[j].find_element_by_xpath(".//span[contains(@class, 'ui_bubble_rating bubble_')]").get_attribute("class").split("_")[3]
             review = container[j].find_element_by_xpath(".//q[@class='IRsGHoPm']").text.replace("\n", " ")
             csvWriter.writerow([hotel_name, date, rating, title, review])
