@@ -1,8 +1,6 @@
-import sys
 import csv
 from selenium import webdriver
 import time
-import math
 
 # default path to file to store data
 path_to_file = "./reviews.csv"
@@ -20,7 +18,10 @@ csvWriter.writerow(["Hotel Name", "Date", "Rating (/50)", "Title", "Review"])
 driver = webdriver.Firefox()
 
 for url in csvReader:
-    driver.get(url[0])
+    url = url[0]
+    if url[0] == "#":
+        continue
+    driver.get(url)
     hotel_name = driver.find_element_by_xpath(".//h1[@class='_1mTlpMC3']").text
     # total_number = int(driver.find_element_by_xpath(".//span[@class='_33O9dg0j']").text[:-8])
     # num_page = math.ceil(total_number/5)
@@ -33,11 +34,14 @@ for url in csvReader:
 
 
         for j in range(len(container)):
-
-            container[j].find_element_by_xpath("//a[@class='ocfR3SKN']").click()
             title = container[j].find_element_by_xpath(".//div[@class='glasR4aX']").text
             date = container[j].find_element_by_xpath(".//span[@class='_34Xs-BQm']").text[14:]
             rating = container[j].find_element_by_xpath(".//span[contains(@class, 'ui_bubble_rating bubble_')]").get_attribute("class").split("_")[3]
+            read_more = True
+            try:
+                container[j].find_element_by_xpath(".//span[@class='_3maEfNCR']").click()
+            except:
+                pass
             review = container[j].find_element_by_xpath(".//q[@class='IRsGHoPm']").text.replace("\n", " ")
             csvWriter.writerow([hotel_name, date, rating, title, review])
 
